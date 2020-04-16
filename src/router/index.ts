@@ -1,10 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import firebase from 'firebase';
-import Dashboard from '@/components/dashboard/dashboard.vue';
-import SignUp from '@/components/sign-up/sign-up.vue';
-import Login from '@/components/login/login.vue';
-import Settings from '@/components/settings/settings.vue';
 
 Vue.use(VueRouter);
 
@@ -16,17 +12,24 @@ const routes = [
   {
     path: '/sign-up',
     name: 'SignUp',
-    component: SignUp,
+    component: () =>
+      import(
+        /* webpackChunkName: "signup" */ '@/components/sign-up/sign-up.vue'
+      ),
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login,
+    component: () =>
+      import(/* webpackChunkName: "login" */ '@/components/login/login.vue'),
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard,
+    component: () =>
+      import(
+        /* webpackChunkName: "dashboard" */ '@/components/dashboard/dashboard.vue'
+      ),
     meta: {
       requiresAuth: true,
     },
@@ -34,7 +37,10 @@ const routes = [
   {
     path: '/settings',
     name: 'Settings',
-    component: Settings,
+    component: () =>
+      import(
+        /* webpackChunkName: "settings" */ '@/components/settings/settings.vue'
+      ),
     meta: {
       requiresAuth: true,
     },
