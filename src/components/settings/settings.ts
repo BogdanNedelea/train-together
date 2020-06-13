@@ -23,6 +23,8 @@ export default class Settings extends Vue {
   public user = {} as UserObject;
   public userId = '';
   public labelPosition = 'on-border';
+  public imageUrl: any = ''; // TYPE FOR FILE
+  public image = null;
 
   // User store
   @userModule.Getter(userGetters.GetUser)
@@ -106,6 +108,7 @@ export default class Settings extends Vue {
       categoryUserOptions: categoryUserOptions,
       userOptions: this.user,
       userUid: this.getUserId,
+      image: this.image,
     };
 
     await this.updateBulkUserCategories(options);
@@ -128,5 +131,30 @@ export default class Settings extends Vue {
       position: 'is-top-right',
       type: 'is-danger',
     });
+  }
+
+  onPickFile() {
+    const element: HTMLElement = document.getElementsByClassName(
+      'fileInput',
+    )[0] as HTMLElement;
+    element.click();
+  }
+
+  onFilePicked(event: any) {
+    const files = event.target.files;
+    const filename = files[0].name;
+    // Checks if the files has an extension
+    if (filename.lastIndexOf('.') <= 0) {
+      return alert('Add a valid file'); //CHANGE
+    }
+    // Turn into a base 64- binary to string value
+    const fileReader = new FileReader();
+    fileReader.addEventListener('load', () => {
+      this.imageUrl = fileReader.result;
+      this.user.imageUrl = this.imageUrl;
+    });
+    fileReader.readAsDataURL(files[0]);
+    // Store the file without any chages
+    this.image = files[0];
   }
 }

@@ -24,6 +24,24 @@
         </div>
       </div>
 
+      <!-- PICTURE -->
+      <div class="image-container mb-20 mt-20" @click="onPickFile">
+        <img :src="user.imageUrl" class="avatar" />
+        <div class="middle">
+          <font-awesome-icon
+            icon="upload"
+            class="upload-icon"
+          ></font-awesome-icon>
+        </div>
+        <input
+          class="fileInput"
+          type="file"
+          style="display: none;"
+          accept="image/*"
+          @change="onFilePicked"
+        />
+      </div>
+
       <!-- Other details -->
       <div class="mb-20 mt-20">
         <font-awesome-icon icon="sliders-h"></font-awesome-icon>
