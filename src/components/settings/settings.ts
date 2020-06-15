@@ -81,7 +81,7 @@ export default class Settings extends Vue {
     // Checks is user deselected some categories
     const deselectedCategories = Object.keys(
       this.initialSelectedOptions,
-    ).filter((obj) => {
+    ).filter((obj: any) => {
       return this.selectedOptions[obj] !== this.initialSelectedOptions[obj];
     });
 
@@ -101,7 +101,7 @@ export default class Settings extends Vue {
       location: this.user.location,
     };
 
-    this.user.categories = this.selectedOptions;
+    Object.assign(this.user.categories, this.selectedOptions);
 
     const options = {
       userCategories: this.selectedOptions,

@@ -78,7 +78,7 @@ export default class OnboardingModal extends Vue {
 
   addCategories(): void {
     const userId = this.getUserId;
-    Object.keys(this.selectedCategories).forEach((selected: string) => {
+    Object.keys(this.selectedCategories).forEach((selected: any) => {
       this.addUserCategory(this.selectedCategories[selected], userId);
     });
   }

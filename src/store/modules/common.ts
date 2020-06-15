@@ -2,7 +2,6 @@ import { ActionTree, ActionContext } from 'vuex';
 import { MainState } from '@/typings/store';
 import firebaseConfig from '@/config/firebase-config';
 
-import { namespace } from 'vuex-class';
 export class State {}
 
 const actions: ActionTree<State, MainState> = {
